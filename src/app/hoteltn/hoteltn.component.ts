@@ -19,7 +19,9 @@ export class HoteltnComponent implements OnInit {
   j:number=-1;
   counter(): any[] {
     this.j=this.j+1;
+    console.log(this.j);    
     return new Array(this.leshotelsSearched[this.j].etoile);
+  
   }
   onSubmit(chaine:string) { 
     this.leshotelsSearched=this.ressourcesevice.initializeHotelsSearched();
@@ -30,7 +32,7 @@ export class HoteltnComponent implements OnInit {
           
         }
         this.leshotelsSearched=this.ressourcesevice.gethotelsSearched();  
-        
+        this.j=-1;
           
       }
      
