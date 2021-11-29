@@ -1,3 +1,5 @@
+import { Price } from "./price";
+
 export class HotelClass {
     
     constructor(
@@ -8,6 +10,7 @@ export class HotelClass {
         public avis?:string,
         public rate?:number, 
         public etoile?:number,
+        public price?:Price
     ){
 
     }

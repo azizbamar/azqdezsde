@@ -1,22 +1,69 @@
 <div>
-    <form>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
         <label for="">Nom Hotel</label>
-    <input type="text" placeholder="Nom de l'hotel" ><br>
+    <input type="text" placeholder="Nom de l'hotel" name='name'ngModel><br>
     <label for="">Emplassement de l'image</label>
-    <input type="text" ><br>
+    <input type="text" name='image' ngModel><br>
     <label for="">La ville</label>
-    <select name="" id="">
+    <select name="ville" id="" ngModel>
         <option *ngFor="let t of lesvilles;index as i" >{{t}}</option>
     </select><br>
     <label for="">Presisez la categorie</label>
-    <input type="text"><br>
+    <input type="text"name="categorie" ngModel><br>
+    <label for="">avis</label>
+    <input type="text"name="avis" ngModel><br>
     <label for="">Note</label>
-    <input type="number"><br>
-    <button (click)="onAjoutHotel()" >Ajouter hotel</button>
+    <input type="number"name="rate" ngModel><br>
+    <label for="">Etoile</label>
+    <input type="number"name="etoile" ngModel><br>
+    <button>Ajouter hotel</button>
 
     </form>
 </div>
-<button (click)="onChangeHotel()" >Modifier hotel existant</button>
-<div>
+<button (click)="modifier()" >Modifier hotel existant</button>
+<div *ngIf='modif==true'>
+    <label for="">Entrer l'emplacement de l'hotel</label>
+    <select name="ville" (change)="onSelectedE()" [(ngModel)]="ville">
+        <option *ngFor="let t of lesvilles;index as i" >{{t}}</option>
+    </select><br>
+</div>
+<div *ngIf="selectE==true">
+    <label for="">Entrer le nom de l'hotel</label>
+    <select name="hotel" (change)="onSelectedH()" [(ngModel)]="chaine">
+        <option selected value="">select hotel</option>
+        <option *ngFor="let t of leshotelsSearched;index as i" >{{t.name}}</option>
+    </select><br>
+</div>
+
+
+<div *ngIf='selectH==true'>
+    <form [formGroup]="productForm" (ngSubmit)="onChange()">
+        <label for="">Nom Hotel</label>
+    <input type="text" name='name'formControlName="name"><br>
+    <label for="">Emplassement de l'image</label>
+    <input type="text" name='image' formControlName="image"><br>
+    <label for="">La ville</label>
+    <select name="ville" id="" formControlName="ville">
+        <option *ngFor="let t of lesvilles;index as i" >{{t}}</option>
+    </select><br>
+    <label for="">Presisez la categorie</label>
+    <input type="text"name="categorie" formControlName="categorie"><br>
+    <label for="">avis</label>
+    <input type="text"name="avis" formControlName="avis"><br>
+    <label for="">Note</label>
+    <input type="number"name="rate" formControlName="rate"><br>
+    <label for="">Etoile</label>
+    <input type="number"name="etoile" formControlName="etoile"><br>
+    <button>modifier hotel</button>
+    </form>
+</div>
+<button (click)="toDelete=true">hotel à supprimer</button>
+<div *ngIf='toDelete==true'>
+    <select name="hotelDelete" [(ngModel)]="hotelDel" (change)="supp=true">
+        <option selected value="">select hotel</option>
+        <option *ngFor="let t of leshotels;index as i" >{{t.name}}</option>
+    </select><br>
+    <button *ngIf="supp==true" (click)="deleteHotel()">supprimer l'hotel</button>
 
 </div>
+{{leshotels|json}}

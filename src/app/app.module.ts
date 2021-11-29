@@ -11,6 +11,8 @@ import { OmraComponent } from './omra/omra.component';
 import { GestionAgenceComponent } from './gestion-agence/gestion-agence.component';
 import { PageAdminComponent } from './page-admin/page-admin.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,12 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
+    
+    
     
   ],
   providers: [],

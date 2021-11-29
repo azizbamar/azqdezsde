@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { HotelClass } from '../hotel-class';
 import { RessourceService } from '../ressource.service';
 
@@ -17,10 +16,10 @@ export class HoteltnComponent implements OnInit {
   hotel:HotelClass = new HotelClass();
   villeSelected:String="";
   j:number=-1;
-  counter(): any[] {
+  counter(i:number|undefined): any[] {
     this.j=this.j+1;
     console.log(this.j);    
-    return new Array(this.leshotelsSearched[this.j].etoile);
+    return new Array(i);
   
   }
   onSubmit(chaine:string) { 
