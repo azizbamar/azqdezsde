@@ -14,7 +14,7 @@
              <input type="button" (click)="onSubmit(textbox.value)" value="Rechercher"/>
             </form>
 
-            <ul class="list-group">
+            <ul class="list-group" *ngIf="leshotels">
 
                 <li class="list-group-item" *ngFor="let a of leshotelsSearched" >
 

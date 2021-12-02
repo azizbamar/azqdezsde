@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HotelClass } from './hotel-class';
+import { PricesRoom } from './pricesRoom';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PricesCatering } from './pricesCatering';
 
+
+const URL = 'http://localhost:3000/listHotel';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,13 +17,7 @@ export class RessourceService {
   }
   leshotelsSearched:HotelClass[]=[];
 
-  listHotel:HotelClass [] = [ 
-    new HotelClass('radisson blue','aaaa',this.listeville[2],"luxe","tres bien",9,5 ), 
-    new HotelClass('Africa jade','../../assets/africajade2.jpg', this.listeville[1],"luxe","tres bien",8.7,4 ), 
-    new HotelClass('El Mouradi','',this.listeville[1],"moyen"," bien",6.3,3), 
-    new HotelClass('Beach Club','',this.listeville[1],"economique","pas mal",5.3,4 )
-    
-   ]
+  listHotel:HotelClass [] = []
    public addHotel(hotel: HotelClass){
     
        
@@ -26,12 +26,34 @@ export class RessourceService {
      
     
   };
-  public addHotelToRessource(hotel:HotelClass){
-    if(this.listHotel.findIndex(x=>x.name==hotel.name)==-1){
-      console.log('do not enter');
-      this.listHotel.push(hotel);}
+  addHotelToRessource(hotel:HotelClass):Observable<HotelClass>{
+    return this.http.post<HotelClass>(URL, hotel);
   }
-   
+  // public addHotelToRessource(hotel:HotelClass){
+  //   if(this.listHotel.findIndex(x=>x.name==hotel.name)==-1){
+  //     console.log('do not enter');
+  //     this.listHotel.push(hotel);}
+  // }
+  //******************************** */
+  getHotels():Observable<HotelClass[]>{
+    
+    return this.http.get<HotelClass[]>(URL,);
+    }
+    modifyHotel(hotel:HotelClass,id:number|undefined):Observable<HotelClass>{
+      return this.http.put<HotelClass>(URL+"/"+id,hotel);
+    }
+
+
+    delHotel(id:number|undefined):Observable<HotelClass>{
+      return this.http.delete<HotelClass>(URL+"/"+id);
+    }
+    // delHotel(nomHotel:string){
+    //   this.listHotel.forEach((element,index)=>{
+    //     if(element.name==nomHotel) this.listHotel.splice(index,1);
+    //  });
+      
+  
+    // }
    gethotels(){
      return this.listHotel;
    }
@@ -47,13 +69,7 @@ export class RessourceService {
     this.listHotel[index]=hotel;
     return this.listHotel[index];
   }
-  delHotel(nomHotel:string){
-    this.listHotel.forEach((element,index)=>{
-      if(element.name==nomHotel) this.listHotel.splice(index,1);
-   });
-    
+ 
 
-  }
-
-  constructor() { }
+  constructor(private http:HttpClient) { }
 }

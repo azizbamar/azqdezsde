@@ -26,7 +26,11 @@ export class HoteltnComponent implements OnInit {
     this.leshotelsSearched=this.ressourcesevice.initializeHotelsSearched();
      
       for (let index = 0; index < this.leshotels.length; index++) {
+        
+        
+
         if (chaine==this.leshotels[index].ville) {
+          
           this.ressourcesevice.addHotel(this.leshotels[index]);
           
         }
@@ -43,7 +47,15 @@ export class HoteltnComponent implements OnInit {
   constructor(private ressourcesevice : RessourceService) { }
 
   ngOnInit(): void {
-    this.leshotels=this.ressourcesevice.gethotels();
+    this.ressourcesevice.getHotels()
+    .subscribe (data => {
+      this.leshotels = data as HotelClass[]
+      console.log(this.leshotels);
+      
+    }); 
+    
+    
+        //this.leshotels=this.ressourcesevice.gethotels();
     this.lesvilles=this.ressourcesevice.getvilles();
   }
 

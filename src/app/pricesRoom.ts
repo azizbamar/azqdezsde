@@ -1,4 +1,4 @@
-export class Price {
+export class PricesRoom {
     constructor(
         public single?:number,
         public double?:number,
@@ -7,7 +7,6 @@ export class Price {
         public demiPension?:number,
         public pensionComplete?:number,
         public allIn?:number,
-        public weekEnd?:boolean,
         public addWeekEnd?:number 
     ){}
 }

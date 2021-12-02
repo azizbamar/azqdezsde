@@ -1,7 +1,7 @@
-import { Price } from './price';
+import { PricesRoom } from './pricesRoom';
 
 describe('Price', () => {
   it('should create an instance', () => {
-    expect(new Price()).toBeTruthy();
+    expect(new PricesRoom()).toBeTruthy();
   });
 });
